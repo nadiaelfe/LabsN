@@ -1,0 +1,9 @@
+\documentclass[border=1cm]{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}
+\draw (-1,0) to (5,1);
+\draw[green] (-1,0) to[out=90,in=135] (5,1);
+\draw[cyan] (-1,0) .. controls (0,-2) .. (5,1);
+\end{tikzpicture}
+\end{document}

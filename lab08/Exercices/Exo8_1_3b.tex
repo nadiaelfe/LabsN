@@ -1,0 +1,12 @@
+\documentclass[border=1cm]{standalone}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}[scale=3]
+% define nodes
+\node[circle,draw] (label1) at (0,0) {$\sum_{i=1}^{n}n^2$};
+\node[rectangle,draw] (label2) at (1,1)
+↪ {$\frac{1}{\sqrt{2}}$};
+% draw the line
+\draw (label1) -- (label2);
+\end{tikzpicture}
+\end{document}
