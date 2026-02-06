@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</h1>
+<p>Целью данной лабораторной работы является освоение создания презентаций и постеров в LaTeX с использованием пакета Beamer и других инструментов для визуального представления научных работ.</p>
+<p>The purpose of this lab work is to learn how to create presentations and posters in LaTeX using the Beamer package and other tools for visual presentation of scientific work.</p>
+<h1 id="%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5">Задание</h1>
+<ol>
+<li>Освоить создание презентаций с использованием класса Beamer</li>
+<li>Изучить структуру презентаций, создание слайдов и управление контентом</li>
+<li>Научиться использовать паузы и эффекты появления для динамических презентаций</li>
+</ol>
+<h1 id="%D1%82%D0%B5%D0%BE%D1%80%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5">Теоретическое введение</h1>
+<h2 id="7-%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-latex--latex-presentations">7 Презентации LaTeX / LaTeX Presentations</h2>
+<h3 id="71-%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8-%D1%81-beamer--presentation-with-beamer">7.1 Презентации с Beamer / Presentation with Beamer</h3>
+<p>В LaTeX можно создавать презентации с использованием класса документов beamer.
+In LaTeX it is possible to make presentations using the beamer document class.</p>
+<pre class="hljs"><code><div>\documentclass{beamer}
+
+\usetheme{Copenhagen}
+\author{Bert}
+\title{A tale of two primes}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\end{document}
+</div></code></pre>
+<p><img src="image/1_0.jpg" alt="">{ #fig:001 width=100% }</p>
+<h3 id="711-%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0-%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8--structure-of-a-presentation">7.1.1 Структура презентации / Structure of a Presentation</h3>
+<p>Для создания слайдов используется окружение frame с заголовком слайда.
+To make slides you use the frame environment with the slide title.</p>
+<pre class="hljs"><code><div>\begin{frame}
+\frametitle{Article}
+Some text about the article.
+\end{frame}
+
+\begin{frame}
+\frametitle{Mathematics}
+A helpful tool for mathematicians.
+\end{frame}
+</div></code></pre>
+<p><img src="image/1_1.jpg" alt="">{ #fig:002 width=100% }</p>
+<h3 id="712-%D0%BF%D0%B0%D1%83%D0%B7%D1%8B--pauses">7.1.2 Паузы / Pauses</h3>
+<p>Команда <code>\pause</code> позволяет элементам появляться последовательно.
+The <code>\pause</code> command allows elements to appear one by one.</p>
+<pre class="hljs"><code><div>\begin{frame}{Article}
+
+\begin{block}{Definition}
+This is a definition.
+\end{block}
+
+\pause
+
+\begin{block}{Euclid's theorem}
+This is a theorem.
+\end{block}
+
+\end{frame}
+</div></code></pre>
+<p><img src="image/1_2.jpg" alt="">{ #fig:003 width=100% }</p>
+<h3 id="713-%D0%BF%D0%BE%D1%8F%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2--uncover">7.1.3 Появление элементов / Uncover</h3>
+<p>Команда <code>\uncover</code> дает больше контроля над появлением элементов.
+The <code>\uncover</code> command gives more control over element appearance.</p>
+<pre class="hljs"><code><div>\begin{frame}
+\frametitle{Sets}
+A \alert{set} is a collection of objects.\uncover&lt;2-&gt;{ For example:
+\[ Z=\{\text{cow}, \text{pig}, \text{elephant}\}. \]}
+\uncover&lt;3-&gt;{ We call the objects in $Z$ the \alert{elements} of $Z$.}
+\end{frame}
+</div></code></pre>
+<p><img src="image/1_3.jpg" alt="">{ #fig:004 width=100% }</p>
+<h3 id="714-%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5--layout">7.1.4 Оформление / Layout</h3>
+<p>Beamer предоставляет различные темы для изменения внешнего вида.
+Beamer provides various themes to change appearance.</p>
+<pre class="hljs"><code><div>\usetheme{Warsaw}
+\usecolortheme{beaver}
+</div></code></pre>
+<h3 id="715-%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D1%8B-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D1%80%D0%BE%D1%82%D0%BA%D0%B8%D1%85-%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B9--tips-for-short-presentations">7.1.5 Советы для коротких презентаций / Tips for Short Presentations</h3>
+<ul>
+<li>Изолируйте основную тему и представьте её рано / Isolate the main subject and cover it early</li>
+<li>Используйте картинки вместо текста / Use pictures instead of text</li>
+<li>Примеры вместо абстрактных определений / Examples instead of abstract definitions</li>
+<li>Следите за временем / Watch the time</li>
+</ul>
+<h2 id="72-%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80%D1%8B--posters">7.2 Постеры / Posters</h2>
+<h3 id="%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%BD%D1%8B%D0%B5-%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80%D0%BE%D0%B2--main-poster-creation-methods">Основные методы создания постеров / Main Poster Creation Methods</h3>
+<ol>
+<li><strong>Класс a0poster</strong> - похож на article с колонками</li>
+<li><strong>Пакет beamerposter</strong> - использует возможности Beamer</li>
+<li><strong>Класс tikzposter</strong> - основан на TikZ с блочной структурой</li>
+</ol>
+<h3 id="721-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-a0poster--the-a0poster-documentclass">7.2.1 Класс a0poster / The a0poster documentclass</h3>
+<pre class="hljs"><code><div>\documentclass[a0, portrait]{a0poster}
+\usepackage{multicol}
+\setlength{\columnsep}{100pt}
+
+\begin{document}
+\begin{multicols}{2}
+% Содержание постерa / Poster content
+\end{multicols}
+\end{document}
+</div></code></pre>
+<p><img src="image/2_1.jpg" alt="">{ #fig:005 width=100% }</p>
+<h3 id="722-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-beamerposter--the-beamerposter-package">7.2.2 Пакет beamerposter / The beamerposter package</h3>
+<pre class="hljs"><code><div>\documentclass[xcolor={svgnames}]{beamer}
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+
+\begin{document}
+\begin{frame}
+\begin{columns}
+\begin{column}{.33\textwidth}
+% Содержание колонки / Column content
+\end{column}
+\end{columns}
+\end{frame}
+\end{document}
+</div></code></pre>
+<p><img src="image/2_2.jpg" alt="">{ #fig:006 width=100% }</p>
+<h3 id="723-%D0%BA%D0%BB%D0%B0%D1%81%D1%81-tikzposter--the-tikzposter-documentclass">7.2.3 Класс tikzposter / The tikzposter documentclass</h3>
+<pre class="hljs"><code><div>\documentclass[24pt, a0paper, portrait]{tikzposter}
+\usetheme{Default}
+
+\begin{document}
+\maketitle
+\begin{columns}
+\column{.33}
+\block{Title}{Content}
+\end{columns}
+\end{document}
+</div></code></pre>
+<p><img src="image/2_4.jpg" alt="">{ #fig:007 width=100% }</p>
+<h1 id="%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Выполнение лабораторной работы</h1>
+<h2 id="%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%80%D0%B0-%D1%81-beamerposter--creating-poster-with-beamerposter">Создание постера с beamerposter / Creating Poster with beamerposter</h2>
+<pre class="hljs"><code><div>\documentclass[xcolor={svgnames}]{beamer}
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter}
+\usetheme{Berlin}
+
+\title{Научный постер с Beamer}
+\author{Коне Сирики}
+\institute{РУДН}
+
+\begin{document}
+
+\begin{frame}
+
+\begin{columns}
+\begin{column}{0.32\textwidth}
+
+\begin{block}{Введение}
+Beamerposter позволяет использовать все возможности Beamer для создания постеров
+\end{block}
+
+\begin{block}{Преимущества}
+\begin{itemize}
+\item Единый стиль с презентациями
+\item Богатые возможности оформления
+\item Простота использования
+\end{itemize}
+\end{block}
+
+\end{column}
+
+\begin{column}{0.32\textwidth}
+
+\begin{exampleblock}{Пример}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{example-image}
+\end{center}
+Графическое представление данных
+\end{exampleblock}
+
+\end{column}
+
+\begin{column}{0.32\textwidth}
+
+\begin{alertblock}{Важная информация}
+LaTeX обеспечивает высокое качество типографики и математических формул
+\end{alertblock}
+
+\begin{block}{Заключение}
+Beamerposter - отличный выбор для научных постеров
+\end{block}
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\end{document}
+</div></code></pre>
+<p><img src="image/3.jpg" alt="">{ #fig:08 width=100% }</p>
+<h1 id="%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B">Выводы</h1>
+<p>В ходе лабораторной работы №7 я освоил создание презентаций и постеров в LaTeX. Изучил работу с классом Beamer для создания динамических презентаций с паузами и эффектами появления. Освоил три основных метода создания постеров: a0poster, beamerposter и tikzposter, изучил их преимущества и особенности применения. На практике создал презентации с математическим содержанием и научные постеры, что позволило закрепить полученные знания.</p>
+<p>In this lab work 7, I mastered creating presentations and posters in LaTeX. I studied working with the Beamer class for creating dynamic presentations with pauses and appearance effects. I mastered three main methods for creating posters: a0poster, beamerposter and tikzposter, studied their advantages and application features. In practice, I created presentations with mathematical content and scientific posters, which allowed me to consolidate the acquired knowledge.</p>
+<h1 id="%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D1%8Bunnumbered">Список литературы{.unnumbered}</h1>
+<ol>
+<li>Practical scientific writing - Presentations and Posters chapter</li>
+<li>Beamer User Guide - Till Tantau</li>
+<li>LaTeX/Beamer - Wikibooks</li>
+<li>a0poster, beamerposter, tikzposter package documentation</li>
+</ol>
+<div class="{#refs}">
+</div>
+
+</body>
+</html>
