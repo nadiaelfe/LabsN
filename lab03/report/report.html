@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%D1%86%D0%B5%D0%BB%D1%8C-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Цель работы</h1>
+<p>Целью данной лабораторной работы является ознакомление с основами набора математических выражений в LaTeX.</p>
+<p>The purpose of this lab work is to learn how to typeset mathematical formulas and equations using LaTeX math mode and related packages.</p>
+<h1 id="%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5">Задание</h1>
+<ol>
+<li>Study inline and display math modes.</li>
+<li>Use the <code>amsmath</code> package to align and format equations.</li>
+<li>Apply different math fonts.</li>
+<li>Use <code>mathtools</code> for advanced formatting.</li>
+<li>Try bold math and Unicode math.</li>
+<li>Perform the exercises with examples.</li>
+</ol>
+<h1 id="%D1%82%D0%B5%D0%BE%D1%80%D0%B5%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5">Теоретическое введение</h1>
+<h2 id="31-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC--math-mode">3.1 Математический режим / Math mode</h2>
+<p>В LaTeX существует два математических режима: <strong>inline</strong> и <strong>display</strong>.<br>
+In LaTeX there are two main math modes: inline (within text) and display (centered block).</p>
+<pre class="hljs"><code><div>documentclass{article}
+\usepackage[T1]{fontenc}
+\begin{document}
+A sentence with inline mathematics: $y = mx + c$.
+
+A second sentence with inline mathematics: $5^{2}=3^{2}+4^{2}$.
+
+A second paragraph containing display math.
+\[
+y = mx + c
+\]
+See how the paragraph continues after the display.
+\end{document}
+</div></code></pre>
+<p>(рис.[-@fig:001])</p>
+<p><img src="image/3_1.jpg" alt="">{#fig:001 width=100% }</p>
+<h3 id="311-inline-math-mode-and-mathematical-notation">3.1.1 Inline math mode and mathematical notation</h3>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage[T1]{fontenc}
+\begin{document}
+Superscripts $a^{b}$ and subscripts $a_{b}$.
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:002])</p>
+<p><img src="image/3_1a.jpg" alt="">{ #fig:002 width=100% }</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage[T1]{fontenc}
+\begin{document}
+Some mathematics: $y = 2 \sin \theta^{2}$.
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:003])</p>
+<p><img src="image/3_1b.jpg" alt="">{ #fig:003 width=100% }</p>
+<h3 id="312-display-mathematics">3.1.2 Display mathematics</h3>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage[T1]{fontenc}
+\begin{document}
+A paragraph about a larger equation
+\[
+\int_{-\infty}^{+\infty} e^{-x^2} \, dx
+\]
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:004])</p>
+<p><img src="image/3_1_2a.jpg" alt="">{ #fig:004 width=100% }</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage[T1]{fontenc}
+\newcommand{\diff}{\mathop{}\!d} % For italic
+% \newcommand{\diff}{\mathop{}\!\mathrm{d}} % For upright
+\begin{document}
+A paragraph about a larger equation
+\[
+\int_{-\infty}^{+\infty} e^{-x^2} \diff x
+\]
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:005])</p>
+<p><img src="image/3_1_2b.jpg" alt="">{ #fig:005 width=100% }</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage[T1]{fontenc}
+\begin{document}
+A paragraph about a larger equation
+\begin{equation}
+\int_{-\infty}^{+\infty} e^{-x^2} \, dx
+\end{equation}
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:006])</p>
+<p><img src="image/3_1_2c.jpg" alt="">{ #fig:006 width=100% }</p>
+<h2 id="32-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-amsmath--the-amsmath-package">3.2 Пакет amsmath / The amsmath package</h2>
+<p>Пакет <code>amsmath</code> расширяет стандартные возможности для набора формул и выравнивания уравнений.
+The <code>amsmath</code> package enhances math typesetting and alignment.</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\begin{document}
+\begin{align*}
+Q_{n,k} &amp;= Q_{n-1,k} + Q_{n-1,k-1} + \binom{n}{k}, \\
+&amp;\quad \text{for } n,k&gt;0.
+\end{align*}
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:007])</p>
+<p><img src="image/3_2a.jpg" alt="">{ #fig:007 width=100% }</p>
+<p>(см. Рис. [-@fig:008])</p>
+<p><img src="image/3_2b.jpg" alt="">{ #fig:008 width=100% }</p>
+<h2 id="33-%D1%88%D1%80%D0%B8%D1%84%D1%82%D1%8B-%D0%B2-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%BC-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B5--fonts-in-math-mode">3.3 Шрифты в математическом режиме / Fonts in math mode</h2>
+<p>В математике разные шрифты обозначают разные типы объектов.
+Different font commands give different styles and meanings.</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+$\mathrm{A}, \mathit{A}, \mathbf{A}, \mathsf{A}, \mathtt{A}, \mathbb{A}$
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:009])</p>
+<p><img src="image/3_3a.jpg" alt="">{ #fig:008 width=100% }</p>
+<p>(см. Рис. [-@fig:010])</p>
+<p><img src="image/3_3b.jpg" alt="">{ #fig:010 width=100% }</p>
+<h2 id="34-%D0%B4%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%B2%D1%8B%D1%80%D0%B0%D0%B2%D0%BD%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F--further-amsmath-alignments">3.4 Дополнительные выравнивания / Further amsmath alignments</h2>
+<p>Environments like <code>gather</code> and <code>multline</code> are used for multi-line equations.</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\begin{gather}
+P(x)=ax^{5}+bx^{4}+cx^{3}+dx^{2}+ex+f\\
+x^2+x=10
+\end{gather}
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:011])</p>
+<p><img src="image/3_4.jpg" alt="">{ #fig:011 width=100% }</p>
+<h2 id="341-columns-in-math-alignments">3.4.1 Columns in math alignments</h2>
+<p>(см. Рис. [-@fig:012])</p>
+<p><img src="image/3_4a.jpg" alt="">{ #fig:012 width=100% }</p>
+<p>(см. Рис. [-@fig:013])</p>
+<p><img src="image/3_4b.jpg" alt="">{ #fig:013 width=100% }</p>
+<h2 id="35-%D0%B6%D0%B8%D1%80%D0%BD%D1%8B%D0%B9-%D1%88%D1%80%D0%B8%D1%84%D1%82-%D0%B2-%D1%84%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0%D1%85--bold-math">3.5 Жирный шрифт в формулах / Bold Math</h2>
+<p>To bold entire or partial equations, we can use <code>\boldmath</code> or the <code>bm</code> package.</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage{bm}
+\begin{document}
+$(x+\bm{y})(x-\bm{y}) = x^2 - \bm{y}^2$
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:014])</p>
+<p><img src="image/3_5a.jpg" alt="">{ #fig:014 width=100% }</p>
+<p>(см. Рис. [-@fig:015])</p>
+<p><img src="image/3_5b.jpg" alt="">{ #fig:015 width=100% }</p>
+<h2 id="36-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82-mathtools--mathtools-package">3.6 Пакет Mathtools / Mathtools package</h2>
+<p><code>mathtools</code> builds upon <code>amsmath</code> and provides extended features like column alignment in matrices.</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage{mathtools}
+\begin{document}
+\[
+\begin{pmatrix*}[r]
+10 &amp; 11 \\
+1 &amp; 2 \\
+-5 &amp; -6
+\end{pmatrix*}
+\]
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:016])</p>
+<p><img src="image/3_6.jpg" alt="">{ #fig:016 width=100% }</p>
+<h2 id="37-%D1%8E%D0%BD%D0%B8%D0%BA%D0%BE%D0%B4%D0%BD%D0%B0%D1%8F-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0--unicode-math">3.7 Юникодная математика / Unicode Math</h2>
+<p>Using <code>unicode-math</code> with OpenType fonts allows modern mathematical typesetting.</p>
+<pre class="hljs"><code><div>\documentclass{article}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
+\begin{document}
+\[
+\log \alpha + \log \beta = \log(\alpha\beta)
+\]
+\end{document}
+</div></code></pre>
+<p>(см. Рис. [-@fig:017])</p>
+<p><img src="image/3_7.jpg" alt="">{ #fig:017 width=100% }</p>
+<h1 id="%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B">Выполнение лабораторной работы</h1>
+<h2 id="38-%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F--exercises">3.8 Упражнения / Exercises</h2>
+<h3 id="1-%D0%BF%D0%B5%D1%80%D0%B5%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BC%D0%B5%D0%B6%D0%B4%D1%83-%D1%80%D0%B5%D0%B6%D0%B8%D0%BC%D0%B0%D0%BC%D0%B8--switching-between-math-modes">1. Переключение между режимами / Switching between math modes</h3>
+<p>(см. Рис. [-@fig:018])
+<img src="image/3_8a.jpg" alt="">{ #fig:018 width=100% }</p>
+<h3 id="2-%D0%B3%D1%80%D0%B5%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%B1%D1%83%D0%BA%D0%B2%D1%8B--greek-letters">2. Греческие буквы / Greek letters</h3>
+<p>(см. Рис. [-@fig:019])
+<img src="image/3_8b.jpg" alt="">{ #fig:019 width=100% }</p>
+<h3 id="3-%D0%BA%D0%BE%D0%BC%D0%B1%D0%B8%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D1%88%D1%80%D0%B8%D1%84%D1%82%D0%BE%D0%B2--combining-fonts">3. Комбинирование шрифтов / Combining fonts</h3>
+<p>(см. Рис. [-@fig:020])
+<img src="image/3_8c.jpg" alt="">{ #fig:020 width=100% }</p>
+<h3 id="4-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%8B-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0-%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D1%83%D1%80%D0%B0%D0%B2%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9--equation-alignment">4. Параметры класса документа для уравнений / Equation alignment</h3>
+<p>(см. Рис. [-@fig:021])
+<img src="image/3_8d1.jpg" alt="">{ #fig:021 width=100% }</p>
+<p>(см. Рис. [-@fig:022])
+<img src="image/3_8d2.jpg" alt="">{ #fig:022 width=100% }</p>
+<p>(см. Рис. [-@fig:023])
+<img src="image/3_8d3.jpg" alt="">{ #fig:023 width=100% }</p>
+<h3 id="5-%D1%80%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-amsmath--using-mathtools">5. Расширенное использование amsmath / Using Mathtools</h3>
+<p>(см. Рис. [-@fig:024])
+<img src="image/3_8e.jpg" alt="">{ #fig:024 width=100% }</p>
+<h3 id="6-%D0%BC%D0%B0%D1%82%D0%B5%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0-%D0%B2%D1%8B%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B0-%D0%B6%D0%B8%D1%80%D0%BD%D1%8B%D0%BC-%D1%88%D1%80%D0%B8%D1%84%D1%82%D0%BE%D0%BC-%D1%81-bm--math-in-bold-with-bm">6. Математика выделена жирным шрифтом с bm / Math in bold with bm</h3>
+<p>(см. Рис. [-@fig:025])
+<img src="image/3_8f.jpg" alt="">{ #fig:025 width=100% }</p>
+<h1 id="%D0%B2%D1%8B%D0%B2%D0%BE%D0%B4%D1%8B">Выводы</h1>
+<p>В ходе лабораторной работы №3 я изучил основы набора математических выражений в LaTeX, познакомился с пакетами <code>amsmath</code>, <code>mathtools</code>, <code>bm</code>, и <code>unicode-math</code>.
+В результате я научился выравнивать уравнения, изменять математические шрифты, делать символы жирными и работать с многострочными выражениями.</p>
+<p>As a result, the goal of the lab was achieved: mastering math mode in LaTeX and using key math packages for professional-quality typesetting.</p>
+<h1 id="%D1%81%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%82%D1%83%D1%80%D1%8Bunnumbered">Список литературы{.unnumbered}</h1>
+<div class="{#refs}">
+</div>
+
+</body>
+</html>
